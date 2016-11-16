@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from rest_framework import routers
+from django.conf import settings
+from django.conf.urls.static import static
 
 from jarbas.api.views import DocumentViewSet, SupplierViewSet, ReceiptViewSet
 from jarbas.frontend.views import home
@@ -29,4 +31,4 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^api/', include(router.urls, namespace='api')),
     url(r'^admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
