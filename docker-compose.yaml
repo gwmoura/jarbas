@@ -1,5 +1,11 @@
 version: '2'
 services:
+  db:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=jarbas
+      - POSTGRES_DB=jarbas
   elm:
     build:
       context: .
@@ -14,5 +20,8 @@ services:
     ports:
       - "8001:8001"
     environment:
-      - DEBUG=True
+      - SECRET_KEY=lets-rock
+      - DATABASE_URL=postgres://jarbas:mysecretpassword@db/jarbas
+    depends_on:
+      - db
 
